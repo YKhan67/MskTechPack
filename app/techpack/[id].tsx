@@ -1,9 +1,12 @@
-import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, Image, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { useQuery, useAction } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Id } from "../../convex/_generated/dataModel";
 import { SvgXml } from "react-native-svg";
+import * as FileSystem from 'expo-file-system';
+import * as Sharing from 'expo-sharing';
+import { Download } from "lucide-react-native";
 
 export default function TechPackDetails() {
   const { id } = useLocalSearchParams();
@@ -15,6 +18,28 @@ export default function TechPackDetails() {
       techPackId: id as Id<"techPacks">, 
       imagePath: "/home/team/shared/MskTechPack/pic-6.jpeg" 
     }).catch(console.error);
+  };
+
+  const handleDownload = async () => {
+    if (!techPack?.svgContent) return;
+    
+    try {
+      const filename = `techpack-${id}.svg`;
+      const fileUri = `${FileSystem.documentDirectory}${filename}`;
+      
+      await FileSystem.writeAsStringAsync(fileUri, techPack.svgContent, {
+        encoding: FileSystem.EncodingType.UTF8,
+      });
+      
+      if (await Sharing.isAvailableAsync()) {
+        await Sharing.shareAsync(fileUri);
+      } else {
+        Alert.alert("Sharing not available", "The SVG has been saved but sharing is not supported on this device.");
+      }
+    } catch (error) {
+      console.error("Download error:", error);
+      Alert.alert("Error", "Failed to download the SVG file.");
+    }
   };
 
   if (!techPack) return <Text className="p-4 italic text-center mt-10">Loading Tech Pack...</Text>;
@@ -61,7 +86,18 @@ export default function TechPackDetails() {
           </View>
 
           <View className="w-full md:w-1/2 p-2">
-            <Text className="text-sm font-bold text-gray-400 uppercase mb-2">Technical Sketch (Vector)</Text>
+            <View className="flex-row justify-between items-center mb-2">
+              <Text className="text-sm font-bold text-gray-400 uppercase">Technical Sketch (Vector)</Text>
+              {techPack.svgContent && (
+                <TouchableOpacity 
+                  onPress={handleDownload}
+                  className="flex-row items-center bg-blue-50 px-3 py-1 rounded-full"
+                >
+                  <Download size={14} color="#2563eb" />
+                  <Text className="text-xs font-bold text-blue-600 ml-1">Download SVG</Text>
+                </TouchableOpacity>
+              )}
+            </View>
             {techPack.svgContent ? (
               <View className="w-full h-80 rounded-2xl bg-white border border-gray-200 items-center justify-center p-4">
                 <SvgXml xml={techPack.svgContent} width="100%" height="100%" />

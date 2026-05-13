@@ -22,10 +22,10 @@ export const analyzeAndVectorize = action({
       
       const prompt = `Analyze this garment image and provide high-fidelity industrial-standard technical specifications in strict JSON format.
 Include:
-- measurements: Fit (e.g. relaxed, slim), Sleeve type (e.g. set-in, raglan), Hem type (e.g. shirt-tail, straight).
-- constructionPoints: Collar (e.g. spread, pointed), Closure (e.g. placket, hidden), Shoulders (e.g. dropped, padded), Cuffs (e.g. barrel, french), and any unique manufacturing details (e.g. topstitching, seam types).
-- fabrics: Main material (detailed description), Trims (buttons, zippers, threads), and Embellishments (beadwork, embroidery).
-- colorway: Primary and secondary colors.
+- measurements: Detailed fit analysis (e.g. oversized/relaxed), sleeve construction (e.g. dropped shoulder, long sleeve), hem finish (e.g. topstitched straight hem).
+- constructionPoints: High-fidelity details on Collar (type, stand), Closure (placket type, button count/type), Cuffs (barrel/french, pleats), and specialized details like the scattered insect beadwork motifs.
+- fabrics: Exact material description (e.g. off-white silk satin), Trims (e.g. mother of pearl buttons), and detailed Embellishment specs (e.g. metallic beadwork).
+- colorway: Primary and secondary colors (e.g. Pearl White / Silver).
 
 Return ONLY a JSON object with the following keys: measurements (array of {label, value}), constructionPoints (array of {point, description}), fabrics (array of {type, description}), colorway (array of {part, color}).`;
 
@@ -72,10 +72,15 @@ Return ONLY a JSON object with the following keys: measurements (array of {label
       if (process.env.GOOGLE_API_KEY && process.env.GOOGLE_API_KEY !== "dummy-key") {
           try {
               const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-              const svgPrompt = `Generate a professional technical flat sketch (CAD style) of this garment in SVG format. 
-Use clean black line paths (<path> or <line>) on a transparent background. 
-Include major construction lines: silhouette, collar, sleeves, closure, and hem.
-Keep it minimal and industrial standard. Return ONLY the raw SVG code.`;
+              const svgPrompt = `Generate a high-fidelity professional technical flat sketch (CAD style) of the garment in the image.
+The output MUST be a valid SVG.
+Requirements:
+- Use clean, solid black strokes (<path> or <line>) with a consistent stroke-width (e.g., 2).
+- No fill colors (use fill="none").
+- Include ALL structural details: Pointed collar with stand, center front placket with buttons, dropped shoulders, long sleeves with barrel cuffs, and a straight hem.
+- Accurately represent the scattered silver insect beadwork motifs as small stylized vector elements.
+- The sketch should be symmetrical and follow industrial tech pack standards.
+- Return ONLY the raw SVG code, no markdown or explanations.`;
               
               const imageBuffer = await fs.readFile(args.imagePath);
               const result = await model.generateContent([
@@ -96,15 +101,22 @@ Keep it minimal and industrial standard. Return ONLY the raw SVG code.`;
       // 2. Fallback to enhanced Potrace if Gemini failed or was skipped
       if (!svg) {
           const image = await Jimp.read(args.imagePath);
-          // Enhanced pre-processing for sharper lines
-          image.greyscale().contrast(0.9).normalize().threshold({ max: 150 });
+          // Designer Recommended Pre-processing
+          // Upscale 4x for better detail
+          image.resize({ w: image.width * 4 });
+          image.greyscale()
+               .contrast(1) // Max contrast
+               .posterize(2) // Reduce to 2 colors
+               .normalize();
+          
           const processedBuffer = await image.getBuffer('image/png');
 
           svg = await new Promise<string>((resolve, reject) => {
             potrace.trace(processedBuffer, {
               threshold: 128,
-              turdSize: 5,
-              optTolerance: 0.2,
+              turdSize: 15, // Recommended 10-20
+              optTolerance: 0.2, // Recommended
+              alphaMax: 1.3, // Recommended
               blackOnWhite: true,
               color: "black"
             }, (err, svg) => {
@@ -112,7 +124,7 @@ Keep it minimal and industrial standard. Return ONLY the raw SVG code.`;
               else resolve(svg);
             });
           });
-          console.log("Vectorization completed via Potrace (enhanced)");
+          console.log("Vectorization completed via Potrace (High-Fidelity Tune)");
       }
     } catch (error) {
       console.error("Error in vectorization:", error);
