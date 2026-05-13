@@ -4,7 +4,7 @@ import fs from "fs/promises";
 
 async function main() {
   const imagePath = "/home/team/shared/MskTechPack/pic-6.jpeg";
-  const outputSvgPath = "/home/team/shared/MskTechPack/automated_output.svg";
+  const outputSvgPath = "/home/agent-engineer/maryam-tech-pack/automated_output.svg";
 
   try {
     const image = await Jimp.read(imagePath);
