@@ -8,21 +8,26 @@ const templateSvg = fs.readFileSync('/home/team/shared/MskTechPack/shirt_templat
 const pathMatch = motifSvg.match(/<path d="([^"]+)"/);
 const motifPath = pathMatch ? pathMatch[1] : '';
 
-// Coordinate mapping parameters (calculated from bbox analysis)
-const imgWidth = 328;
-const imgHeight = 461;
-const imgCenterX = 164;
-const imgCenterY = 230.5;
+// Coordinate mapping parameters (refined for shirt-to-shirt mapping)
+const photoShirtXMin = 80;
+const photoShirtXMax = 280;
+const photoShirtYMin = 130;
+const photoShirtYMax = 455;
 
-const svgInnerMinX = -23050;
-const svgInnerMaxX = 28872;
-const svgInnerMinY = -9523;
-const svgInnerMaxY = 24137;
+const svgShirtXMin = -17941;
+const svgShirtXMax = 23253;
+const svgShirtYMin = -2847;
+const svgShirtYMax = 22811;
 
-const svgInnerWidth = svgInnerMaxX - svgInnerMinX;
-const svgInnerHeight = svgInnerMaxY - svgInnerMinY;
-const svgInnerCenterX = (svgInnerMinX + svgInnerMaxX) / 2;
-const svgInnerCenterY = (svgInnerMinY + svgInnerMaxY) / 2;
+const imgWidth = photoShirtXMax - photoShirtXMin;
+const imgHeight = photoShirtYMax - photoShirtYMin;
+const imgCenterX = (photoShirtXMin + photoShirtXMax) / 2;
+const imgCenterY = (photoShirtYMin + photoShirtYMax) / 2;
+
+const svgInnerWidth = svgShirtXMax - svgShirtXMin;
+const svgInnerHeight = svgShirtYMax - svgShirtYMin;
+const svgInnerCenterX = (svgShirtXMin + svgShirtXMax) / 2;
+const svgInnerCenterY = (svgShirtYMin + svgShirtYMax) / 2;
 
 const scaleX = svgInnerWidth / imgWidth;
 const scaleY = svgInnerHeight / imgHeight;
@@ -40,6 +45,12 @@ let motifsGroup = '<g id="Motifs" fill="#000000" stroke="none">';
 motifCoords.forEach((coord, index) => {
     const centerX = (coord.xmin + coord.xmax) / 2;
     const centerY = (coord.ymin + coord.ymax) / 2;
+    
+    // Filter out coordinates outside the shirt area (e.g. head, hair)
+    if (centerY < photoShirtYMin || centerX < photoShirtXMin || centerX > photoShirtXMax) {
+        return;
+    }
+
     const mapped = mapCoords(centerX, centerY);
     
     // Scale motif to match image size (approx 15px width)
