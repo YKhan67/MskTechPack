@@ -1,0 +1,92 @@
+[
+  {
+    "xmin": 110,
+    "ymin": 66,
+    "xmax": 113,
+    "ymax": 69
+  },
+  {
+    "xmin": 111,
+    "ymin": 77,
+    "xmax": 118,
+    "ymax": 81
+  },
+  {
+    "xmin": 122,
+    "ymin": 87,
+    "xmax": 130,
+    "ymax": 97
+  },
+  {
+    "xmin": 207,
+    "ymin": 139,
+    "xmax": 225,
+    "ymax": 152
+  },
+  {
+    "xmin": 144,
+    "ymin": 144,
+    "xmax": 174,
+    "ymax": 175
+  },
+  {
+    "xmin": 224,
+    "ymin": 158,
+    "xmax": 234,
+    "ymax": 167
+  },
+  {
+    "xmin": 235,
+    "ymin": 217,
+    "xmax": 245,
+    "ymax": 225
+  },
+  {
+    "xmin": 267,
+    "ymin": 246,
+    "xmax": 270,
+    "ymax": 249
+  },
+  {
+    "xmin": 211,
+    "ymin": 250,
+    "xmax": 217,
+    "ymax": 259
+  },
+  {
+    "xmin": 266,
+    "ymin": 250,
+    "xmax": 277,
+    "ymax": 255
+  },
+  {
+    "xmin": 258,
+    "ymin": 259,
+    "xmax": 267,
+    "ymax": 264
+  },
+  {
+    "xmin": 178,
+    "ymin": 286,
+    "xmax": 185,
+    "ymax": 306
+  },
+  {
+    "xmin": 231,
+    "ymin": 312,
+    "xmax": 246,
+    "ymax": 345
+  },
+  {
+    "xmin": 91,
+    "ymin": 374,
+    "xmax": 94,
+    "ymax": 408
+  },
+  {
+    "xmin": 155,
+    "ymin": 399,
+    "xmax": 162,
+    "ymax": 405
+  }
+]
