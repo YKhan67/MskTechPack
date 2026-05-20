@@ -35,14 +35,20 @@ export const create = mutation({
   args: {
     name: v.string(),
     description: v.optional(v.string()),
+    imageUrl: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const techPackId = await ctx.db.insert("techPacks", {
       name: args.name,
       description: args.description,
+      imageUrl: args.imageUrl,
       status: "pending",
       createdAt: Date.now(),
     });
     return techPackId;
   },
+});
+
+export const generateUploadUrl = mutation(async (ctx) => {
+  return await ctx.storage.generateUploadUrl();
 });

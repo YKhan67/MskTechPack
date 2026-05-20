@@ -1,0 +1,700 @@
+{
+  "shirtBox": {
+    "shirtMinX": 0,
+    "shirtMaxX": 322,
+    "shirtMinY": 0,
+    "shirtMaxY": 459
+  },
+  "motifs": [
+    {
+      "centerX": 157,
+      "centerY": 14,
+      "size": 14
+    },
+    {
+      "centerX": 171,
+      "centerY": 18,
+      "size": 8
+    },
+    {
+      "centerX": 184,
+      "centerY": 25,
+      "size": 4
+    },
+    {
+      "centerX": 194.5,
+      "centerY": 33,
+      "size": 5
+    },
+    {
+      "centerX": 119.5,
+      "centerY": 42,
+      "size": 9
+    },
+    {
+      "centerX": 221.5,
+      "centerY": 60,
+      "size": 3
+    },
+    {
+      "centerX": 111.5,
+      "centerY": 69,
+      "size": 3
+    },
+    {
+      "centerX": 125.5,
+      "centerY": 71,
+      "size": 7
+    },
+    {
+      "centerX": 139.5,
+      "centerY": 78,
+      "size": 9
+    },
+    {
+      "centerX": 224.5,
+      "centerY": 78,
+      "size": 3
+    },
+    {
+      "centerX": 117.5,
+      "centerY": 80,
+      "size": 3
+    },
+    {
+      "centerX": 127,
+      "centerY": 89,
+      "size": 4
+    },
+    {
+      "centerX": 224.5,
+      "centerY": 90,
+      "size": 3
+    },
+    {
+      "centerX": 125,
+      "centerY": 97,
+      "size": 12
+    },
+    {
+      "centerX": 133.5,
+      "centerY": 107,
+      "size": 5
+    },
+    {
+      "centerX": 223.5,
+      "centerY": 116,
+      "size": 3
+    },
+    {
+      "centerX": 145.5,
+      "centerY": 121,
+      "size": 15
+    },
+    {
+      "centerX": 141.5,
+      "centerY": 124,
+      "size": 13
+    },
+    {
+      "centerX": 226.5,
+      "centerY": 128,
+      "size": 3
+    },
+    {
+      "centerX": 194.5,
+      "centerY": 132,
+      "size": 15
+    },
+    {
+      "centerX": 208.5,
+      "centerY": 133,
+      "size": 7
+    },
+    {
+      "centerX": 143.5,
+      "centerY": 136,
+      "size": 9
+    },
+    {
+      "centerX": 191.5,
+      "centerY": 138,
+      "size": 15
+    },
+    {
+      "centerX": 224,
+      "centerY": 138,
+      "size": 10
+    },
+    {
+      "centerX": 134.5,
+      "centerY": 140,
+      "size": 3
+    },
+    {
+      "centerX": 164,
+      "centerY": 141,
+      "size": 6
+    },
+    {
+      "centerX": 188.5,
+      "centerY": 144,
+      "size": 15
+    },
+    {
+      "centerX": 217,
+      "centerY": 144,
+      "size": 8
+    },
+    {
+      "centerX": 214.5,
+      "centerY": 145,
+      "size": 15
+    },
+    {
+      "centerX": 234.5,
+      "centerY": 145,
+      "size": 3
+    },
+    {
+      "centerX": 176.5,
+      "centerY": 147,
+      "size": 3
+    },
+    {
+      "centerX": 146.5,
+      "centerY": 148,
+      "size": 3
+    },
+    {
+      "centerX": 246,
+      "centerY": 152,
+      "size": 4
+    },
+    {
+      "centerX": 157,
+      "centerY": 156,
+      "size": 4
+    },
+    {
+      "centerX": 122.5,
+      "centerY": 157,
+      "size": 11
+    },
+    {
+      "centerX": 178,
+      "centerY": 158,
+      "size": 12
+    },
+    {
+      "centerX": 174,
+      "centerY": 161,
+      "size": 14
+    },
+    {
+      "centerX": 255.5,
+      "centerY": 161,
+      "size": 3
+    },
+    {
+      "centerX": 252.5,
+      "centerY": 164,
+      "size": 15
+    },
+    {
+      "centerX": 170,
+      "centerY": 166,
+      "size": 14
+    },
+    {
+      "centerX": 124,
+      "centerY": 169,
+      "size": 4
+    },
+    {
+      "centerX": 167.5,
+      "centerY": 169,
+      "size": 15
+    },
+    {
+      "centerX": 264.5,
+      "centerY": 170,
+      "size": 3
+    },
+    {
+      "centerX": 181.5,
+      "centerY": 171,
+      "size": 3
+    },
+    {
+      "centerX": 259.5,
+      "centerY": 176,
+      "size": 15
+    },
+    {
+      "centerX": 256.5,
+      "centerY": 181,
+      "size": 15
+    },
+    {
+      "centerX": 268.5,
+      "centerY": 188,
+      "size": 5
+    },
+    {
+      "centerX": 265.5,
+      "centerY": 193,
+      "size": 15
+    },
+    {
+      "centerX": 102.5,
+      "centerY": 199,
+      "size": 3
+    },
+    {
+      "centerX": 181.5,
+      "centerY": 201,
+      "size": 11
+    },
+    {
+      "centerX": 275,
+      "centerY": 202,
+      "size": 4
+    },
+    {
+      "centerX": 270.5,
+      "centerY": 205,
+      "size": 15
+    },
+    {
+      "centerX": 157.5,
+      "centerY": 206,
+      "size": 9
+    },
+    {
+      "centerX": 181,
+      "centerY": 212,
+      "size": 8
+    },
+    {
+      "centerX": 280.5,
+      "centerY": 214,
+      "size": 5
+    },
+    {
+      "centerX": 276.5,
+      "centerY": 217,
+      "size": 15
+    },
+    {
+      "centerX": 235.5,
+      "centerY": 224,
+      "size": 15
+    },
+    {
+      "centerX": 131,
+      "centerY": 225,
+      "size": 4
+    },
+    {
+      "centerX": 285,
+      "centerY": 227,
+      "size": 4
+    },
+    {
+      "centerX": 279.5,
+      "centerY": 228,
+      "size": 15
+    },
+    {
+      "centerX": 268.5,
+      "centerY": 235,
+      "size": 15
+    },
+    {
+      "centerX": 237.5,
+      "centerY": 244,
+      "size": 15
+    },
+    {
+      "centerX": 282,
+      "centerY": 244,
+      "size": 12
+    },
+    {
+      "centerX": 83.5,
+      "centerY": 245,
+      "size": 5
+    },
+    {
+      "centerX": 277.5,
+      "centerY": 247,
+      "size": 15
+    },
+    {
+      "centerX": 132,
+      "centerY": 248,
+      "size": 4
+    },
+    {
+      "centerX": 296.5,
+      "centerY": 252,
+      "size": 13
+    },
+    {
+      "centerX": 238.5,
+      "centerY": 254,
+      "size": 15
+    },
+    {
+      "centerX": 293.5,
+      "centerY": 256,
+      "size": 15
+    },
+    {
+      "centerX": 237.5,
+      "centerY": 262,
+      "size": 15
+    },
+    {
+      "centerX": 261.5,
+      "centerY": 262,
+      "size": 5
+    },
+    {
+      "centerX": 182.5,
+      "centerY": 263,
+      "size": 9
+    },
+    {
+      "centerX": 292,
+      "centerY": 264,
+      "size": 14
+    },
+    {
+      "centerX": 289.5,
+      "centerY": 267,
+      "size": 15
+    },
+    {
+      "centerX": 285.5,
+      "centerY": 270,
+      "size": 15
+    },
+    {
+      "centerX": 237.5,
+      "centerY": 271,
+      "size": 15
+    },
+    {
+      "centerX": 79.5,
+      "centerY": 272,
+      "size": 3
+    },
+    {
+      "centerX": 179.5,
+      "centerY": 274,
+      "size": 3
+    },
+    {
+      "centerX": 256.5,
+      "centerY": 274,
+      "size": 15
+    },
+    {
+      "centerX": 231.5,
+      "centerY": 275,
+      "size": 15
+    },
+    {
+      "centerX": 227.5,
+      "centerY": 277,
+      "size": 15
+    },
+    {
+      "centerX": 283.5,
+      "centerY": 277,
+      "size": 15
+    },
+    {
+      "centerX": 274.5,
+      "centerY": 278,
+      "size": 15
+    },
+    {
+      "centerX": 197.5,
+      "centerY": 281,
+      "size": 15
+    },
+    {
+      "centerX": 216.5,
+      "centerY": 281,
+      "size": 15
+    },
+    {
+      "centerX": 191.5,
+      "centerY": 283,
+      "size": 9
+    },
+    {
+      "centerX": 240,
+      "centerY": 285,
+      "size": 4
+    },
+    {
+      "centerX": 187,
+      "centerY": 287,
+      "size": 12
+    },
+    {
+      "centerX": 235.5,
+      "centerY": 289,
+      "size": 15
+    },
+    {
+      "centerX": 283,
+      "centerY": 289,
+      "size": 8
+    },
+    {
+      "centerX": 278.5,
+      "centerY": 290,
+      "size": 15
+    },
+    {
+      "centerX": 183,
+      "centerY": 291,
+      "size": 14
+    },
+    {
+      "centerX": 275.5,
+      "centerY": 292,
+      "size": 15
+    },
+    {
+      "centerX": 271.5,
+      "centerY": 294,
+      "size": 15
+    },
+    {
+      "centerX": 262.5,
+      "centerY": 295,
+      "size": 15
+    },
+    {
+      "centerX": 95.5,
+      "centerY": 296,
+      "size": 3
+    },
+    {
+      "centerX": 180,
+      "centerY": 299,
+      "size": 10
+    },
+    {
+      "centerX": 236.5,
+      "centerY": 299,
+      "size": 15
+    },
+    {
+      "centerX": 254,
+      "centerY": 300,
+      "size": 14
+    },
+    {
+      "centerX": 92,
+      "centerY": 307,
+      "size": 6
+    },
+    {
+      "centerX": 246.5,
+      "centerY": 307,
+      "size": 3
+    },
+    {
+      "centerX": 192.5,
+      "centerY": 308,
+      "size": 9
+    },
+    {
+      "centerX": 237.5,
+      "centerY": 309,
+      "size": 15
+    },
+    {
+      "centerX": 177,
+      "centerY": 310,
+      "size": 4
+    },
+    {
+      "centerX": 234.5,
+      "centerY": 311,
+      "size": 15
+    },
+    {
+      "centerX": 231.5,
+      "centerY": 314,
+      "size": 15
+    },
+    {
+      "centerX": 91.5,
+      "centerY": 319,
+      "size": 5
+    },
+    {
+      "centerX": 243,
+      "centerY": 321,
+      "size": 4
+    },
+    {
+      "centerX": 177.5,
+      "centerY": 322,
+      "size": 7
+    },
+    {
+      "centerX": 131.5,
+      "centerY": 325,
+      "size": 3
+    },
+    {
+      "centerX": 251,
+      "centerY": 331,
+      "size": 4
+    },
+    {
+      "centerX": 246.5,
+      "centerY": 333,
+      "size": 15
+    },
+    {
+      "centerX": 80.5,
+      "centerY": 336,
+      "size": 7
+    },
+    {
+      "centerX": 246.5,
+      "centerY": 342,
+      "size": 15
+    },
+    {
+      "centerX": 236.5,
+      "centerY": 346,
+      "size": 7
+    },
+    {
+      "centerX": 127.5,
+      "centerY": 347,
+      "size": 3
+    },
+    {
+      "centerX": 249,
+      "centerY": 354,
+      "size": 8
+    },
+    {
+      "centerX": 245.5,
+      "centerY": 358,
+      "size": 13
+    },
+    {
+      "centerX": 90.5,
+      "centerY": 362,
+      "size": 3
+    },
+    {
+      "centerX": 245,
+      "centerY": 369,
+      "size": 8
+    },
+    {
+      "centerX": 245,
+      "centerY": 381,
+      "size": 8
+    },
+    {
+      "centerX": 91.5,
+      "centerY": 385,
+      "size": 3
+    },
+    {
+      "centerX": 243.5,
+      "centerY": 392,
+      "size": 7
+    },
+    {
+      "centerX": 93,
+      "centerY": 397,
+      "size": 4
+    },
+    {
+      "centerX": 167.5,
+      "centerY": 397,
+      "size": 15
+    },
+    {
+      "centerX": 150.5,
+      "centerY": 399,
+      "size": 3
+    },
+    {
+      "centerX": 160.5,
+      "centerY": 408,
+      "size": 5
+    },
+    {
+      "centerX": 94.5,
+      "centerY": 409,
+      "size": 3
+    },
+    {
+      "centerX": 151.5,
+      "centerY": 411,
+      "size": 5
+    },
+    {
+      "centerX": 90.5,
+      "centerY": 414,
+      "size": 15
+    },
+    {
+      "centerX": 173,
+      "centerY": 414,
+      "size": 6
+    },
+    {
+      "centerX": 90,
+      "centerY": 423,
+      "size": 14
+    },
+    {
+      "centerX": 88.5,
+      "centerY": 431,
+      "size": 15
+    },
+    {
+      "centerX": 81,
+      "centerY": 437,
+      "size": 8
+    },
+    {
+      "centerX": 70.5,
+      "centerY": 441,
+      "size": 3
+    },
+    {
+      "centerX": 82,
+      "centerY": 449,
+      "size": 6
+    },
+    {
+      "centerX": 97,
+      "centerY": 450,
+      "size": 10
+    },
+    {
+      "centerX": 316,
+      "centerY": 459,
+      "size": 12
+    }
+  ]
+}

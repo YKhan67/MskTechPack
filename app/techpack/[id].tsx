@@ -44,6 +44,8 @@ export default function TechPackDetails() {
 
   if (!techPack) return <Text className="p-4 italic text-center mt-10">Loading Tech Pack...</Text>;
 
+  const isProcessing = techPack.status === 'pending' || techPack.status === 'processing';
+
   return (
     <ScrollView className="flex-1 bg-gray-50">
       <View className="p-6">
@@ -52,10 +54,12 @@ export default function TechPackDetails() {
             <Text className="text-3xl font-extrabold text-gray-900">{techPack.name}</Text>
             <Text className="text-lg text-gray-600 mt-1">{techPack.description || "No description provided."}</Text>
             <View className={`mt-2 px-3 py-1 rounded-full self-start ${
-              techPack.status === 'completed' ? 'bg-green-100' : 'bg-blue-100'
+              techPack.status === 'completed' ? 'bg-green-100' : 
+              techPack.status === 'failed' ? 'bg-red-100' : 'bg-blue-100'
             }`}>
               <Text className={`text-xs font-bold uppercase ${
-                techPack.status === 'completed' ? 'text-green-700' : 'text-blue-700'
+                techPack.status === 'completed' ? 'text-green-700' : 
+                techPack.status === 'failed' ? 'text-red-700' : 'text-blue-700'
               }`}>
                 {techPack.status}
               </Text>
@@ -63,9 +67,10 @@ export default function TechPackDetails() {
           </View>
           <TouchableOpacity 
             onPress={handleRetry}
-            className="bg-white border border-gray-200 px-4 py-2 rounded-lg shadow-sm"
+            disabled={isProcessing}
+            className={`bg-white border border-gray-200 px-4 py-2 rounded-lg shadow-sm ${isProcessing ? 'opacity-50' : ''}`}
           >
-            <Text className="text-blue-600 font-bold">Re-analyze</Text>
+            <Text className="text-blue-600 font-bold">{isProcessing ? 'Processing...' : 'Re-analyze'}</Text>
           </TouchableOpacity>
         </View>
 
