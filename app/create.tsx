@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, Image, ScrollView } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image, ScrollView, Alert } from "react-native";
 import { useState } from "react";
 import { useRouter } from "expo-router";
 import { useMutation, useAction } from "convex/react";
@@ -9,12 +9,12 @@ export default function CreateTechPack() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState<string | null>(null);
+  const [isCreating, setIsCreating] = useState(false);
   const router = useRouter();
   const createTechPack = useMutation(api.techPacks.create);
   const analyze = useAction(api.analysis.analyzeAndVectorize);
 
   const pickImage = async () => {
-    // No permissions check is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
       allowsEditing: true,
@@ -31,7 +31,7 @@ export default function CreateTechPack() {
     const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
 
     if (permissionResult.granted === false) {
-      alert("You've refused to allow this appp to access your camera!");
+      alert("You've refused to allow this app to access your camera!");
       return;
     }
 
@@ -49,45 +49,62 @@ export default function CreateTechPack() {
   const generateUploadUrl = useMutation(api.techPacks.generateUploadUrl);
 
   const handleCreate = async () => {
-    if (!name) return;
-    
-    let storageId = null;
-    if (image) {
-      try {
-        // 1. Get upload URL
-        const postUrl = await generateUploadUrl();
-        
-        // 2. Fetch the image and upload it
-        const response = await fetch(image);
-        const blob = await response.blob();
-        
-        const result = await fetch(postUrl, {
-          method: "POST",
-          headers: { "Content-Type": "image/jpeg" }, // Assuming JPEG
-          body: blob,
-        });
-        
-        const { storageId: sid } = await result.json();
-        storageId = sid;
-      } catch (e) {
-        console.error("Upload failed:", e);
-        // Fallback or alert
-      }
+    if (!name) {
+      Alert.alert("Required", "Please enter a name for your Tech Pack.");
+      return;
     }
+    if (isCreating) return;
+
+    setIsCreating(true);
     
-    const techPackId = await createTechPack({ 
-      name, 
-      description, 
-      imageUrl: storageId || undefined 
-    });
-    
-    // Trigger analysis
-    analyze({ 
-      techPackId, 
-      imagePath: image || "/home/team/shared/MskTechPack/pic-6.jpeg" 
-    }).catch(console.error);
-    
-    router.replace(`/techpack/${techPackId}`);
+    try {
+      let storageId = null;
+      if (image) {
+        try {
+          // 1. Get upload URL
+          const postUrl = await generateUploadUrl();
+
+          // 2. Fetch the image and upload it
+          const response = await fetch(image);
+          const blob = await response.blob();
+
+          const result = await fetch(postUrl, {
+            method: "POST",
+            headers: { "Content-Type": blob.type || "image/jpeg" },
+            body: blob,
+          });
+
+          if (!result.ok) throw new Error("Upload failed");
+
+          const json = await result.json();
+          storageId = json.storageId;
+        } catch (e) {
+          console.error("Upload failed:", e);
+          // We allow proceeding without image if upload fails, but alert the user
+          Alert.alert("Upload Error", "Failed to upload image. Proceeding with name and description only.");
+        }
+      }
+
+      const techPackId = await createTechPack({
+        name,
+        description,
+        imageUrl: storageId || undefined
+      });
+
+      // Trigger analysis - fire and forget
+      analyze({
+        techPackId,
+        storageId: storageId || undefined,
+        imagePath: !storageId ? "/home/team/shared/MskTechPack/pic-6.jpeg" : undefined
+      }).catch(err => console.error("Analysis trigger error:", err));
+
+      router.replace(`/techpack/${techPackId}`);
+    } catch (e) {
+      console.error("Creation failed:", e);
+      Alert.alert("Error", "Could not create Tech Pack. Please check your connection to Convex.");
+    } finally {
+      setIsCreating(false);
+    }
   };
 
   return (
@@ -133,10 +150,13 @@ export default function CreateTechPack() {
       </View>
       
       <TouchableOpacity
-        className="bg-blue-600 p-4 rounded-lg items-center mb-10"
+        className={`bg-blue-600 p-4 rounded-lg items-center mb-10 ${isCreating ? 'opacity-50' : ''}`}
         onPress={handleCreate}
+        disabled={isCreating}
       >
-        <Text className="text-white font-bold">Create & Analyze</Text>
+        <Text className="text-white font-bold">
+          {isCreating ? "Creating..." : "Create & Analyze"}
+        </Text>
       </TouchableOpacity>
     </ScrollView>
   );

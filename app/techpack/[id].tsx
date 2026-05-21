@@ -16,7 +16,8 @@ export default function TechPackDetails() {
   const handleRetry = () => {
     analyze({ 
       techPackId: id as Id<"techPacks">, 
-      imagePath: "/home/team/shared/MskTechPack/pic-6.jpeg" 
+      storageId: techPack?.imageUrl || undefined,
+      imagePath: !techPack?.imageUrl ? "/home/team/shared/MskTechPack/pic-6.jpeg" : undefined
     }).catch(console.error);
   };
 

@@ -2,7 +2,7 @@ import "../global.css";
 import { Stack } from "expo-router";
 import { ConvexProvider, ConvexReactClient } from "convex/react";
 
-const convex = new ConvexReactClient(process.env.EXPO_PUBLIC_CONVEX_URL || "https://placeholder.convex.cloud");
+const convex = new ConvexReactClient("https://merry-goldfinch-556.convex.cloud");
 
 export default function RootLayout() {
   return (

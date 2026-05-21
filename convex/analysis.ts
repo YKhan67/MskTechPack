@@ -5,6 +5,8 @@ import { Jimp } from "jimp";
 import potrace from "potrace";
 import { internal } from "./_generated/api";
 import fs from "fs/promises";
+import path from "path";
+import os from "os";
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY || "dummy-key");
 
@@ -117,15 +119,37 @@ function isPointInPoly(point: {x: number, y: number}, vs: any[]) {
 export const analyzeAndVectorize = action({
   args: {
     techPackId: v.id("techPacks"),
-    imagePath: v.string(),
+    imagePath: v.optional(v.string()),
+    storageId: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     console.log(`Starting analysis for tech pack ${args.techPackId}`);
 
+    let activePath = args.imagePath || "/home/team/shared/MskTechPack/pic-6.jpeg";
+
+    // If we have a storageId, download it to a temp file so existing logic works
+    if (args.storageId) {
+      console.log(`Downloading image from storage: ${args.storageId}`);
+      try {
+        const blob = await ctx.storage.get(args.storageId);
+        if (blob) {
+          const buffer = Buffer.from(await blob.arrayBuffer());
+          const tempFile = path.join(os.tmpdir(), `upload_${args.techPackId}_${Date.now()}.jpg`);
+          await fs.writeFile(tempFile, buffer);
+          activePath = tempFile;
+          console.log(`Saved temp file to: ${activePath}`);
+        } else {
+          console.error("Storage blob was null");
+        }
+      } catch (err) {
+        console.error("Failed to download or save image:", err);
+      }
+    }
+
     // 1. AI Specs Analysis
     let specs;
     try {
-      const imageBuffer = await fs.readFile(args.imagePath);
+      const imageBuffer = await fs.readFile(activePath);
       const prompt = `Analyze this garment image and provide high-fidelity industrial-standard technical specifications in strict JSON format.
 Include:
 - measurements: Detailed fit analysis (e.g. oversized/relaxed), sleeve construction (e.g. dropped shoulder, long sleeve), hem finish (e.g. topstitched straight hem).
@@ -181,7 +205,7 @@ Return ONLY a JSON object with the following keys: measurements (array of {label
         }
 
         // Map Motifs from Image
-        const foundMotifs = await findMotifsInImage(args.imagePath);
+        const foundMotifs = await findMotifsInImage(activePath);
         
         // Get Front_View outline for filtering
         const frontViewMatch = templateSvg.match(/id="Front_View"[\s\S]*?<path d="([^"]+)"/);
@@ -221,7 +245,7 @@ Return ONLY a JSON object with the following keys: measurements (array of {label
     } catch (error) {
       console.error("Error in SVG assembly:", error);
       // Fallback to simple Potrace if assembly fails
-      const image = await Jimp.read(args.imagePath);
+      const image = await Jimp.read(activePath);
       image.resize({ w: image.width * 2 }).greyscale();
       const processedBuffer = await image.getBuffer('image/png');
       svg = await new Promise<string>((resolve, reject) => {
